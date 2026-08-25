@@ -12,6 +12,10 @@ import lombok.Data;
 
 @Data
 public class UpdateProductDTO {
+
+    @NotNull(message = "请选择要修改的灭火器")
+    private Long id;
+
     /**
      * 灭火器名称
      */

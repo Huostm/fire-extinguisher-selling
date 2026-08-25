@@ -85,7 +85,19 @@ public class ProductsServiceImpl extends ServiceImpl<ProductsMapper, Products>
 
     @Override
     public ResultVO<String> updateProduct(UpdateProductDTO updateProductDTO) {
-        return null;
+        if (updateProductDTO == null){
+            return ResultVO.error("修改内容不能为空");
+        }
+        Products byId = this.getById(updateProductDTO.getId());
+        if (byId==null){
+            return ResultVO.error("数据不存在");
+        }
+        BeanUtils.copyProperties(updateProductDTO,byId);
+        boolean hasRecord = this.updateById(byId);
+        if (!hasRecord){
+            return ResultVO.error("修改失败");
+        }
+        return ResultVO.success("修改成功");
     }
 
     @Override

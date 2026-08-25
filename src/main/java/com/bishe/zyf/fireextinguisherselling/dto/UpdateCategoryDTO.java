@@ -16,7 +16,7 @@ public class UpdateCategoryDTO {
     /**
      * 主键 id
      */
-    @NotBlank(message = "id不能为空")
+    @NotNull(message = "id不能为空")
     private Long id;
 
     /**
@@ -46,6 +46,6 @@ public class UpdateCategoryDTO {
     /**
      * 巡检周期
      */
-    @NotNull(message = "巡检周期内容不能为空")
+    @NotBlank(message = "巡检周期内容不能为空")
     private String inspectionCycle;
 }

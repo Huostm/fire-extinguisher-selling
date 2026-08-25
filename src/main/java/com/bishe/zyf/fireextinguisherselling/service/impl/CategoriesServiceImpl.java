@@ -77,12 +77,13 @@ public class CategoriesServiceImpl extends ServiceImpl<CategoriesMapper, Categor
         if (byId==null){
             return ResultVO.error("数据不存在");
         }
+        BeanUtils.copyProperties(updateCategoryDTO,byId);
         boolean hasRecord = this.updateById(byId);
-        if (hasRecord){
-            return ResultVO.success("修改成功");
-        }else {
+        if (!hasRecord){
             return ResultVO.error("修改失败");
+
         }
+        return ResultVO.success("修改成功");
     }
 
     @Override
