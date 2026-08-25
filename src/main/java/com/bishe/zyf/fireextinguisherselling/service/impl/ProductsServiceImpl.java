@@ -11,10 +11,7 @@ import com.bishe.zyf.fireextinguisherselling.entity.Products;
 import com.bishe.zyf.fireextinguisherselling.mapper.CategoriesMapper;
 import com.bishe.zyf.fireextinguisherselling.service.ProductsService;
 import com.bishe.zyf.fireextinguisherselling.mapper.ProductsMapper;
-import com.bishe.zyf.fireextinguisherselling.vo.CategoryVO;
-import com.bishe.zyf.fireextinguisherselling.vo.PageResultVO;
-import com.bishe.zyf.fireextinguisherselling.vo.ProductVO;
-import com.bishe.zyf.fireextinguisherselling.vo.ResultVO;
+import com.bishe.zyf.fireextinguisherselling.vo.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -143,6 +140,20 @@ public class ProductsServiceImpl extends ServiceImpl<ProductsMapper, Products>
         pageResult.setList(voList);
 
         return ResultVO.success(pageResult);
+    }
+
+    @Override
+    public ResultVO<ProductDetailVO> detail(Long id) {
+        if (id==null){
+            return ResultVO.error("请选择正确的灭火器");
+        }
+        Products byId = this.getById(id);
+        if (byId==null){
+            return ResultVO.error("该灭火器不存在");
+        }
+        ProductDetailVO productDetailVO = new ProductDetailVO();
+        BeanUtils.copyProperties(byId,productDetailVO);
+        return ResultVO.success(productDetailVO);
     }
 }
 

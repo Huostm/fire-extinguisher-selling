@@ -6,6 +6,7 @@ import com.bishe.zyf.fireextinguisherselling.dto.UpdateProductDTO;
 import com.bishe.zyf.fireextinguisherselling.entity.Products;
 import com.bishe.zyf.fireextinguisherselling.service.ProductsService;
 import com.bishe.zyf.fireextinguisherselling.vo.PageResultVO;
+import com.bishe.zyf.fireextinguisherselling.vo.ProductDetailVO;
 import com.bishe.zyf.fireextinguisherselling.vo.ProductVO;
 import com.bishe.zyf.fireextinguisherselling.vo.ResultVO;
 import jakarta.validation.Valid;
@@ -48,5 +49,10 @@ public class ProductsController {
     @PostMapping("/pageList")
     public ResultVO<PageResultVO<ProductVO>> pageList(@RequestBody QueryDTO queryDTO){
         return productsService.pageList(queryDTO);
+    }
+
+    @GetMapping("/detail/{id}")
+    public ResultVO<ProductDetailVO> detail(@PathVariable Long id){
+        return productsService.detail(id);
     }
 }
