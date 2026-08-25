@@ -1,9 +1,12 @@
 package com.bishe.zyf.fireextinguisherselling.service;
 
 import com.bishe.zyf.fireextinguisherselling.dto.CreateProductDTO;
+import com.bishe.zyf.fireextinguisherselling.dto.QueryDTO;
 import com.bishe.zyf.fireextinguisherselling.dto.UpdateProductDTO;
 import com.bishe.zyf.fireextinguisherselling.entity.Products;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.bishe.zyf.fireextinguisherselling.vo.PageResultVO;
+import com.bishe.zyf.fireextinguisherselling.vo.ProductVO;
 import com.bishe.zyf.fireextinguisherselling.vo.ResultVO;
 import jakarta.validation.Valid;
 
@@ -41,4 +44,11 @@ public interface ProductsService extends IService<Products> {
      * @return
      */
     ResultVO<String> changeStatus(Long id);
+
+    /**
+     * 商品分页查询
+     * @param queryDTO
+     * @return
+     */
+    ResultVO<PageResultVO<ProductVO>> pageList(QueryDTO queryDTO);
 }

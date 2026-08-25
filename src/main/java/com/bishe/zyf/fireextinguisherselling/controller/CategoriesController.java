@@ -1,6 +1,6 @@
 package com.bishe.zyf.fireextinguisherselling.controller;
 
-import com.bishe.zyf.fireextinguisherselling.dto.CategoryQueryDTO;
+import com.bishe.zyf.fireextinguisherselling.dto.QueryDTO;
 import com.bishe.zyf.fireextinguisherselling.dto.CreateCategoryDTO;
 import com.bishe.zyf.fireextinguisherselling.dto.UpdateCategoryDTO;
 import com.bishe.zyf.fireextinguisherselling.service.CategoriesService;
@@ -35,12 +35,12 @@ public class CategoriesController {
     }
 
     @PutMapping("/update")
-    public ResultVO<String> updateCategory(@RequestBody UpdateCategoryDTO updateCategoryDTO){
+    public ResultVO<String> updateCategory(@Valid @RequestBody UpdateCategoryDTO updateCategoryDTO){
         return categoriesService.updateCategory(updateCategoryDTO);
     }
 
     @GetMapping("/pageList")
-    public ResultVO<PageResultVO<CategoryVO>> pageList(@RequestBody CategoryQueryDTO categoryQueryDTO){
-        return categoriesService.pageList(categoryQueryDTO);
+    public ResultVO<PageResultVO<CategoryVO>> pageList(@RequestBody QueryDTO queryDTO){
+        return categoriesService.pageList(queryDTO);
     }
 }

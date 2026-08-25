@@ -1,6 +1,6 @@
 package com.bishe.zyf.fireextinguisherselling.service;
 
-import com.bishe.zyf.fireextinguisherselling.dto.CategoryQueryDTO;
+import com.bishe.zyf.fireextinguisherselling.dto.QueryDTO;
 import com.bishe.zyf.fireextinguisherselling.dto.CreateCategoryDTO;
 import com.bishe.zyf.fireextinguisherselling.dto.UpdateCategoryDTO;
 import com.bishe.zyf.fireextinguisherselling.entity.Categories;
@@ -40,8 +40,8 @@ public interface CategoriesService extends IService<Categories> {
 
     /**
      * 分页查询灭火器列表
-     * @param categoryQueryDTO
+     * @param queryDTO
      * @return
      */
-    ResultVO<PageResultVO<CategoryVO>> pageList(CategoryQueryDTO categoryQueryDTO);
+    ResultVO<PageResultVO<CategoryVO>> pageList(QueryDTO queryDTO);
 }

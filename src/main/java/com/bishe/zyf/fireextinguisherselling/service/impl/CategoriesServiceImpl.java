@@ -3,11 +3,10 @@ package com.bishe.zyf.fireextinguisherselling.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.bishe.zyf.fireextinguisherselling.dto.CategoryQueryDTO;
+import com.bishe.zyf.fireextinguisherselling.dto.QueryDTO;
 import com.bishe.zyf.fireextinguisherselling.dto.CreateCategoryDTO;
 import com.bishe.zyf.fireextinguisherselling.dto.UpdateCategoryDTO;
 import com.bishe.zyf.fireextinguisherselling.entity.Categories;
-import com.bishe.zyf.fireextinguisherselling.entity.Products;
 import com.bishe.zyf.fireextinguisherselling.service.CategoriesService;
 import com.bishe.zyf.fireextinguisherselling.mapper.CategoriesMapper;
 import com.bishe.zyf.fireextinguisherselling.vo.CategoryVO;
@@ -19,7 +18,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
 * @author Administrator
@@ -88,12 +86,12 @@ public class CategoriesServiceImpl extends ServiceImpl<CategoriesMapper, Categor
     }
 
     @Override
-    public ResultVO<PageResultVO<CategoryVO>> pageList(CategoryQueryDTO categoryQueryDTO) {
+    public ResultVO<PageResultVO<CategoryVO>> pageList(QueryDTO queryDTO) {
         LambdaQueryWrapper<Categories> queryWrapper = new LambdaQueryWrapper<>();
-        if (StringUtils.hasText(categoryQueryDTO.getKeyword())){
-            queryWrapper.like(Categories::getName,categoryQueryDTO.getKeyword());
+        if (StringUtils.hasText(queryDTO.getKeyword())){
+            queryWrapper.like(Categories::getName, queryDTO.getKeyword());
         }
-        Page<Categories> page = new Page<>(categoryQueryDTO.getPageNum(), categoryQueryDTO.getPageSize());
+        Page<Categories> page = new Page<>(queryDTO.getPageNum(), queryDTO.getPageSize());
         Page<Categories> resultPage = this.page(page, queryWrapper);
         List<CategoryVO> voList = resultPage.getRecords().stream().map(category -> {
             CategoryVO vo = new CategoryVO();
