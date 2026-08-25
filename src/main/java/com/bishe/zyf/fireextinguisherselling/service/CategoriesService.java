@@ -1,8 +1,12 @@
 package com.bishe.zyf.fireextinguisherselling.service;
 
+import com.bishe.zyf.fireextinguisherselling.dto.CategoryQueryDTO;
 import com.bishe.zyf.fireextinguisherselling.dto.CreateCategoryDTO;
+import com.bishe.zyf.fireextinguisherselling.dto.UpdateCategoryDTO;
 import com.bishe.zyf.fireextinguisherselling.entity.Categories;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.bishe.zyf.fireextinguisherselling.vo.CategoryVO;
+import com.bishe.zyf.fireextinguisherselling.vo.PageResultVO;
 import com.bishe.zyf.fireextinguisherselling.vo.ResultVO;
 import jakarta.validation.Valid;
 
@@ -26,4 +30,18 @@ public interface CategoriesService extends IService<Categories> {
      * @return
      */
     ResultVO<String> changeStatus(Long id);
+
+    /**
+     * 修改灭火器类型内容
+     * @param updateCategoryDTO
+     * @return
+     */
+    ResultVO<String> updateCategory(UpdateCategoryDTO updateCategoryDTO);
+
+    /**
+     * 分页查询灭火器列表
+     * @param categoryQueryDTO
+     * @return
+     */
+    ResultVO<PageResultVO<CategoryVO>> pageList(CategoryQueryDTO categoryQueryDTO);
 }

@@ -1,7 +1,11 @@
 package com.bishe.zyf.fireextinguisherselling.controller;
 
+import com.bishe.zyf.fireextinguisherselling.dto.CategoryQueryDTO;
 import com.bishe.zyf.fireextinguisherselling.dto.CreateCategoryDTO;
+import com.bishe.zyf.fireextinguisherselling.dto.UpdateCategoryDTO;
 import com.bishe.zyf.fireextinguisherselling.service.CategoriesService;
+import com.bishe.zyf.fireextinguisherselling.vo.CategoryVO;
+import com.bishe.zyf.fireextinguisherselling.vo.PageResultVO;
 import com.bishe.zyf.fireextinguisherselling.vo.ResultVO;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,4 +34,13 @@ public class CategoriesController {
         return categoriesService.changeStatus(id);
     }
 
+    @PutMapping("/update")
+    public ResultVO<String> updateCategory(@RequestBody UpdateCategoryDTO updateCategoryDTO){
+        return categoriesService.updateCategory(updateCategoryDTO);
+    }
+
+    @GetMapping("/pageList")
+    public ResultVO<PageResultVO<CategoryVO>> pageList(@RequestBody CategoryQueryDTO categoryQueryDTO){
+        return categoriesService.pageList(categoryQueryDTO);
+    }
 }

@@ -1,14 +1,25 @@
 package com.bishe.zyf.fireextinguisherselling.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.bishe.zyf.fireextinguisherselling.dto.CategoryQueryDTO;
 import com.bishe.zyf.fireextinguisherselling.dto.CreateCategoryDTO;
+import com.bishe.zyf.fireextinguisherselling.dto.UpdateCategoryDTO;
 import com.bishe.zyf.fireextinguisherselling.entity.Categories;
 import com.bishe.zyf.fireextinguisherselling.entity.Products;
 import com.bishe.zyf.fireextinguisherselling.service.CategoriesService;
 import com.bishe.zyf.fireextinguisherselling.mapper.CategoriesMapper;
+import com.bishe.zyf.fireextinguisherselling.vo.CategoryVO;
+import com.bishe.zyf.fireextinguisherselling.vo.PageResultVO;
 import com.bishe.zyf.fireextinguisherselling.vo.ResultVO;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
 * @author Administrator
@@ -57,6 +68,47 @@ public class CategoriesServiceImpl extends ServiceImpl<CategoriesMapper, Categor
             return ResultVO.error("修改灭火器类型激活状态失败");
         }
         return ResultVO.error("更改灭火器类型激活状态成功");
+    }
+
+    @Override
+    public ResultVO<String> updateCategory(UpdateCategoryDTO updateCategoryDTO) {
+        if (updateCategoryDTO == null){
+            return ResultVO.error("请填写修改内容");
+        }
+        Categories byId = this.getById(updateCategoryDTO.getId());
+        if (byId==null){
+            return ResultVO.error("数据不存在");
+        }
+        boolean hasRecord = this.updateById(byId);
+        if (hasRecord){
+            return ResultVO.success("修改成功");
+        }else {
+            return ResultVO.error("修改失败");
+        }
+    }
+
+    @Override
+    public ResultVO<PageResultVO<CategoryVO>> pageList(CategoryQueryDTO categoryQueryDTO) {
+        LambdaQueryWrapper<Categories> queryWrapper = new LambdaQueryWrapper<>();
+        if (StringUtils.hasText(categoryQueryDTO.getKeyword())){
+            queryWrapper.like(Categories::getName,categoryQueryDTO.getKeyword());
+        }
+        Page<Categories> page = new Page<>(categoryQueryDTO.getPageNum(), categoryQueryDTO.getPageSize());
+        Page<Categories> resultPage = this.page(page, queryWrapper);
+        List<CategoryVO> voList = resultPage.getRecords().stream().map(category -> {
+            CategoryVO vo = new CategoryVO();
+            BeanUtils.copyProperties(category, vo);
+            return vo;
+        }).toList();
+
+        PageResultVO<CategoryVO> pageResult = new PageResultVO<>();
+        pageResult.setTotal(resultPage.getTotal());
+        pageResult.setPages(resultPage.getPages());
+        pageResult.setCurrent(resultPage.getCurrent());
+        pageResult.setSize(resultPage.getSize());
+        pageResult.setList(voList);
+
+        return ResultVO.success(pageResult);
     }
 }
 
