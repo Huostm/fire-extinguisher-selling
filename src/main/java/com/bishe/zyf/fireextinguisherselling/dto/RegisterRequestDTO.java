@@ -1,5 +1,6 @@
 package com.bishe.zyf.fireextinguisherselling.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.NonNull;
 
@@ -12,22 +13,22 @@ import lombok.NonNull;
 @Data
 public class RegisterRequestDTO {
 
-    @NonNull
     /**
      * 管理员密钥
      */
+    @NotBlank(message = "管理员密钥不能为空")
     private String checkKey;
 
     /**
      * 管理员账号
      */
-    @NonNull
+    @NotBlank(message = "账号填写不能为空")
     private String username;
 
     /**
      * 管理员密码
      */
-    @NonNull
+    @NotBlank(message = "密码填写不能为空")
     private String password;
 
     /**

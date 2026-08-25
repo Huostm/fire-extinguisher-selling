@@ -5,6 +5,7 @@ import com.bishe.zyf.fireextinguisherselling.dto.RegisterRequestDTO;
 import com.bishe.zyf.fireextinguisherselling.service.UserService;
 import com.bishe.zyf.fireextinguisherselling.vo.LoginVO;
 import com.bishe.zyf.fireextinguisherselling.vo.ResultVO;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,19 +19,19 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-@RequestMapping("/api/admin")
-public class AdminController {
+@RequestMapping("/user")
+public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @PostMapping("/register")
-    public ResultVO<String> register(@RequestBody RegisterRequestDTO registerRequestDTO){
+    @PostMapping("/admin/register")
+    public ResultVO<String> register(@Valid @RequestBody RegisterRequestDTO registerRequestDTO){
         return userService.register(registerRequestDTO);
     }
 
-    @PostMapping("/login")
-    public ResultVO<LoginVO> login(@RequestBody LoginRequestDTO loginRequestDTO){
+    @PostMapping("/admin/login")
+    public ResultVO<LoginVO> login(@Valid @RequestBody LoginRequestDTO loginRequestDTO){
         return userService.login(loginRequestDTO);
     }
 }

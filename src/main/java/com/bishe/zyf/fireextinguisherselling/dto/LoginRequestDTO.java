@@ -1,5 +1,6 @@
 package com.bishe.zyf.fireextinguisherselling.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 /**
@@ -13,10 +14,12 @@ public class LoginRequestDTO {
     /**
      * 管理员账号
      */
+    @NotBlank(message = "账号不能为空")
     private String username;
 
     /**
      * 管理员密码
      */
+    @NotBlank(message = "密码不能为空")
     private String password;
 }

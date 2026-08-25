@@ -15,10 +15,10 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(adminInterceptor)
-                .addPathPatterns("/api/admin/**")          // 拦截所有后台接口
+                .addPathPatterns("/**")          // 拦截所有后台接口
                 .excludePathPatterns(
-                        "/api/admin/login",                // 登录放行
-                        "/api/admin/register"              // 注册放行
+                        "/user/admin/login",                // 登录放行
+                        "/user/admin/register"              // 注册放行
                 );
     }
 }
