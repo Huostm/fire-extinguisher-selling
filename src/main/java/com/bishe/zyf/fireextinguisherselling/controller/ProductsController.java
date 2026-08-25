@@ -13,6 +13,8 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * @Author: zhangyuanfang
  * @CreateTime: 2026-08-25
@@ -54,5 +56,10 @@ public class ProductsController {
     @GetMapping("/detail/{id}")
     public ResultVO<ProductDetailVO> detail(@PathVariable Long id){
         return productsService.detail(id);
+    }
+
+    @GetMapping("/user/list")
+    public ResultVO<List<ProductVO>> productList(String keyWord){
+        return productsService.productList(keyWord);
     }
 }

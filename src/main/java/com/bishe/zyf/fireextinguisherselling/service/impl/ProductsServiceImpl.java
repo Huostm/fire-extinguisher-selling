@@ -155,6 +155,23 @@ public class ProductsServiceImpl extends ServiceImpl<ProductsMapper, Products>
         BeanUtils.copyProperties(byId,productDetailVO);
         return ResultVO.success(productDetailVO);
     }
+
+    @Override
+    public ResultVO<List<ProductVO>> productList(String keyWord) {
+        LambdaQueryWrapper<Products> queryWrapper = new LambdaQueryWrapper<>();
+        if (StringUtils.hasText(keyWord)){
+            queryWrapper.eq(Products::getName,keyWord);
+        }
+        queryWrapper.eq(Products::getIsActive,1);
+        queryWrapper.eq(Products::getIsDeleted,0);
+        List<Products> list = this.list(queryWrapper);
+        List<ProductVO> resultList = list.stream().map(product -> {
+            ProductVO productVO = new ProductVO();
+            BeanUtils.copyProperties(product, productVO);
+            return productVO;
+        }).toList();
+        return ResultVO.success(resultList);
+    }
 }
 
 

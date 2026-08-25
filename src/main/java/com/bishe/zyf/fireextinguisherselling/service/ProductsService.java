@@ -11,6 +11,8 @@ import com.bishe.zyf.fireextinguisherselling.vo.ProductVO;
 import com.bishe.zyf.fireextinguisherselling.vo.ResultVO;
 import jakarta.validation.Valid;
 
+import java.util.List;
+
 /**
 * @author Administrator
 * @description 针对表【products(商品表)】的数据库操作Service
@@ -59,4 +61,11 @@ public interface ProductsService extends IService<Products> {
      * @return
      */
     ResultVO<ProductDetailVO> detail(Long id);
+
+    /**
+     * 用户端：商品列表
+     * @param keyWord
+     * @return
+     */
+    ResultVO<List<ProductVO>> productList(String keyWord);
 }
