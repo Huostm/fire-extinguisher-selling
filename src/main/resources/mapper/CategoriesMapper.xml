@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bishe.zyf.fireextinguisherselling.mapper.CategoriesMapper">
+    <resultMap id="BaseResultMap" type="com.bishe.zyf.fireextinguisherselling.entity.Categories">
+        <id property="id" column="id" />
+        <result property="name" column="name" />
+        <result property="testCycle" column="test_cycle" />
+        <result property="serviceLifeYears" column="service_life_years" />
+        <result property="isActive" column="is_active" />
+        <result property="afterFixTestCycle" column="after_fix_test_cycle" />
+        <result property="inspectionCycle" column="inspection_cycle" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,name,test_cycle,service_life_years,is_active,after_fix_test_cycle,
+        inspection_cycle
+    </sql>
+
+    <update id="updateStatus">
+        update categories set is_active=#{changedStatus}
+        where id=#{id}
+    </update>
+</mapper>

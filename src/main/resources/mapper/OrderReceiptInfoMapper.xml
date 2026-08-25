@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bishe.zyf.fireextinguisherselling.mapper.OrderReceiptInfoMapper">
+
+    <resultMap id="BaseResultMap" type="com.bishe.zyf.fireextinguisherselling.entity.OrderReceiptInfo">
+            <id property="id" column="id" />
+            <result property="orderSn" column="order_sn" />
+            <result property="receiverName" column="receiver_name" />
+            <result property="phone" column="phone" />
+            <result property="province" column="province" />
+            <result property="city" column="city" />
+            <result property="district" column="district" />
+            <result property="detailAddress" column="detail_address" />
+            <result property="createdAt" column="created_at" />
+            <result property="updatedAt" column="updated_at" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,order_sn,receiver_name,phone,province,city,
+        district,detail_address,created_at,updated_at
+    </sql>
+</mapper>

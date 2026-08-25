@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bishe.zyf.fireextinguisherselling.mapper.UserMapper">
+
+    <resultMap id="BaseResultMap" type="com.bishe.zyf.fireextinguisherselling.entity.User">
+            <id property="id" column="id" />
+            <result property="username" column="username" />
+            <result property="password" column="password" />
+            <result property="wechatOpenid" column="wechat_openid" />
+            <result property="nickname" column="nickname" />
+            <result property="avatarUrl" column="avatar_url" />
+            <result property="userType" column="user_type" />
+            <result property="status" column="status" />
+            <result property="createdAt" column="created_at" />
+            <result property="updatedAt" column="updated_at" />
+            <result property="isDeleted" column="is_deleted" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,username,password,wechat_openid,nickname,avatar_url,
+        user_type,status,created_at,updated_at,is_deleted
+    </sql>
+</mapper>
