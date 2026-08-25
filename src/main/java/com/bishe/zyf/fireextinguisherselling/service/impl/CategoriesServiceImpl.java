@@ -1,12 +1,15 @@
 package com.bishe.zyf.fireextinguisherselling.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bishe.zyf.fireextinguisherselling.dto.QueryDTO;
 import com.bishe.zyf.fireextinguisherselling.dto.CreateCategoryDTO;
 import com.bishe.zyf.fireextinguisherselling.dto.UpdateCategoryDTO;
 import com.bishe.zyf.fireextinguisherselling.entity.Categories;
+import com.bishe.zyf.fireextinguisherselling.entity.Products;
+import com.bishe.zyf.fireextinguisherselling.mapper.ProductsMapper;
 import com.bishe.zyf.fireextinguisherselling.service.CategoriesService;
 import com.bishe.zyf.fireextinguisherselling.mapper.CategoriesMapper;
 import com.bishe.zyf.fireextinguisherselling.vo.CategoryVO;
@@ -14,10 +17,12 @@ import com.bishe.zyf.fireextinguisherselling.vo.PageResultVO;
 import com.bishe.zyf.fireextinguisherselling.vo.ResultVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
 * @author Administrator
@@ -30,6 +35,8 @@ public class CategoriesServiceImpl extends ServiceImpl<CategoriesMapper, Categor
 
     @Autowired
     private CategoriesMapper categoriesMapper;
+    @Autowired
+    private ProductsMapper productsMapper;
 
     @Override
     public ResultVO<String> createCategory(CreateCategoryDTO createCategoryDTO) {
@@ -61,11 +68,19 @@ public class CategoriesServiceImpl extends ServiceImpl<CategoriesMapper, Categor
         }
         Integer isActive = byId.getIsActive();
         Integer changedStatus = isActive==1? 0:1;
+        if (changedStatus == 0){
+            LambdaQueryWrapper<Products> queryWrapper = new LambdaQueryWrapper<>();
+            queryWrapper.eq(Products::getCategoryId,id);
+            Long l = productsMapper.selectCount(queryWrapper);
+            if (l > 0){
+                return ResultVO.error("此类别下有灭火器关联，不能禁用");
+            }
+        }
         int result = categoriesMapper.updateStatus(id,changedStatus);
         if (result==0){
             return ResultVO.error("修改灭火器类型激活状态失败");
         }
-        return ResultVO.error("更改灭火器类型激活状态成功");
+        return ResultVO.success("更改灭火器类型激活状态成功");
     }
 
     @Override
@@ -108,6 +123,20 @@ public class CategoriesServiceImpl extends ServiceImpl<CategoriesMapper, Categor
         pageResult.setList(voList);
 
         return ResultVO.success(pageResult);
+    }
+
+    @Override
+    public ResultVO<List<CategoryVO>> getCategories() {
+        LambdaQueryWrapper<Categories> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(Categories::getIsActive,1);
+        List<Categories> list = this.list(queryWrapper);
+        List<CategoryVO> categoryVOList = list.stream()
+                .map(category ->{
+                    CategoryVO vo = new CategoryVO();
+                    BeanUtils.copyProperties(category,vo);
+                    return vo;
+                }).toList();
+        return ResultVO.success(categoryVOList);
     }
 }
 

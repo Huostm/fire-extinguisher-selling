@@ -45,7 +45,7 @@ public class ProductsController {
         return productsService.changeStatus(id);
     }
 
-    @GetMapping("/pageList")
+    @PostMapping("/pageList")
     public ResultVO<PageResultVO<ProductVO>> pageList(@RequestBody QueryDTO queryDTO){
         return productsService.pageList(queryDTO);
     }

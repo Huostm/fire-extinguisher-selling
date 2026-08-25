@@ -10,6 +10,8 @@ import com.bishe.zyf.fireextinguisherselling.vo.PageResultVO;
 import com.bishe.zyf.fireextinguisherselling.vo.ResultVO;
 import jakarta.validation.Valid;
 
+import java.util.List;
+
 /**
 * @author Administrator
 * @description 针对表【categories(分类表)】的数据库操作Service
@@ -44,4 +46,10 @@ public interface CategoriesService extends IService<Categories> {
      * @return
      */
     ResultVO<PageResultVO<CategoryVO>> pageList(QueryDTO queryDTO);
+
+    /**
+     * 获取所有上架状态的灭火器类别
+     * @return
+     */
+    ResultVO<List<CategoryVO>> getCategories();
 }

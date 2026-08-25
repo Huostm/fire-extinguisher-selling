@@ -11,6 +11,8 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * @Author: zhangyuanfang
  * @CreateTime: 2026-08-25
@@ -39,8 +41,13 @@ public class CategoriesController {
         return categoriesService.updateCategory(updateCategoryDTO);
     }
 
-    @GetMapping("/pageList")
+    @PostMapping("/pageList")
     public ResultVO<PageResultVO<CategoryVO>> pageList(@RequestBody QueryDTO queryDTO){
         return categoriesService.pageList(queryDTO);
+    }
+
+    @GetMapping("/getCategories")
+    public ResultVO<List<CategoryVO>> getCategories(){
+        return categoriesService.getCategories();
     }
 }
