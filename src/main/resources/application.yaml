@@ -12,3 +12,11 @@ server:
 
 fire-extinguisher-selling:
   checkKey: 123456
+
+wechat:
+  # 小程序 appid（project.config.json 中已有）
+  appid: wxd6fe3dff41f5e5db
+  # 小程序密钥：微信公众平台「开发管理-开发设置」获取，务必替换成你自己的
+  secret: aafef2422459ecd03abf764dc672a012
+  # 默认头像（所有微信用户统一使用）
+  default-avatar: https://tse4.mm.bing.net/th/id/OIP.G1mbcz86YZWHnzkFxENTnQHaHY?r=0&rs=1&pid=ImgDetMain&o=7&rm=3
