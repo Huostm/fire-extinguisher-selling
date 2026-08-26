@@ -121,6 +121,7 @@ public class ProductsServiceImpl extends ServiceImpl<ProductsMapper, Products>
         if (StringUtils.hasText(queryDTO.getKeyword())){
             queryWrapper.like(Products::getName, queryDTO.getKeyword());
         }
+        queryWrapper.eq(Products::getIsDeleted,0);
         Page<Products> page = new Page<>(queryDTO.getPageNum(), queryDTO.getPageSize());
         Page<Products> resultPage = this.page(page, queryWrapper);
         List<ProductVO> voList = resultPage.getRecords().stream().map(product -> {

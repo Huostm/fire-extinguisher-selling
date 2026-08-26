@@ -6,6 +6,7 @@ import com.bishe.zyf.fireextinguisherselling.dto.UpdateCategoryDTO;
 import com.bishe.zyf.fireextinguisherselling.service.CategoriesService;
 import com.bishe.zyf.fireextinguisherselling.vo.CategoryVO;
 import com.bishe.zyf.fireextinguisherselling.vo.PageResultVO;
+import com.bishe.zyf.fireextinguisherselling.vo.ProductVO;
 import com.bishe.zyf.fireextinguisherselling.vo.ResultVO;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,11 @@ public class CategoriesController {
 
     @GetMapping("/getCategories")
     public ResultVO<List<CategoryVO>> getCategories(){
+        return categoriesService.getCategories();
+    }
+
+    @GetMapping("/user/list")
+    public ResultVO<List<CategoryVO>> categoryList(){
         return categoriesService.getCategories();
     }
 }

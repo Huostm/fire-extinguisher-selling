@@ -38,12 +38,13 @@ public class WebConfig implements WebMvcConfigurer {
                         "/user/admin/register",             // 管理员注册放行
                         "/user/wechat/**",                  // 小程序登录/资料接口放行
                         "/product/user/**",                 // 用户端商品浏览放行
+                        "/category/user/list",              // 用户查看分类列表
                         "/cart/**"                          // 购物车走下面的 token 拦截器
                 );
 
         // 小程序用户拦截器：校验 token，放入当前用户id
         registry.addInterceptor(userTokenInterceptor)
-                .addPathPatterns("/cart/**", "/user/wechat/profile")  // 需要登录的用户端接口
+                .addPathPatterns("/cart/**", "/user/wechat/profile","/category/user/list")  // 需要登录的用户端接口
                 .excludePathPatterns("/user/wechat/login");           // 登录本身不校验
     }
 }
