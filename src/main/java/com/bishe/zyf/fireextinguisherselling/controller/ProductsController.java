@@ -62,4 +62,9 @@ public class ProductsController {
     public ResultVO<List<ProductVO>> productList(String keyWord){
         return productsService.productList(keyWord);
     }
+
+    @GetMapping("/user/getProductByCate/{id}")
+    public ResultVO<List<ProductVO>> getProductByCate(@PathVariable Long id){
+        return productsService.getProductByCate(id);
+    }
 }

@@ -173,6 +173,28 @@ public class ProductsServiceImpl extends ServiceImpl<ProductsMapper, Products>
         }).toList();
         return ResultVO.success(resultList);
     }
+
+    @Override
+    public ResultVO<List<ProductVO>> getProductByCate(Long id) {
+        if (id==null){
+            return ResultVO.error("请选择正确的灭火器类别");
+        }
+        Categories categories = categoriesMapper.selectById(id);
+        if (categories==null){
+            return ResultVO.error("该类别不存在");
+        }
+        LambdaQueryWrapper<Products> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(Products::getCategoryId,id);
+        queryWrapper.eq(Products::getIsActive,1);
+        queryWrapper.eq(Products::getIsDeleted,0);
+        List<Products> list = this.list(queryWrapper);
+        List<ProductVO> resultList = list.stream().map(product -> {
+            ProductVO productVO = new ProductVO();
+            BeanUtils.copyProperties(product, productVO);
+            return productVO;
+        }).toList();
+        return ResultVO.success(resultList);
+    }
 }
 
 

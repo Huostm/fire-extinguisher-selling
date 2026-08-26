@@ -68,4 +68,11 @@ public interface ProductsService extends IService<Products> {
      * @return
      */
     ResultVO<List<ProductVO>> productList(String keyWord);
+
+    /**
+     * 根据类别id查看商品列表
+     * @param id
+     * @return
+     */
+    ResultVO<List<ProductVO>> getProductByCate(Long id);
 }
