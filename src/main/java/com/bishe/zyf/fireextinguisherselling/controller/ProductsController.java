@@ -67,4 +67,14 @@ public class ProductsController {
     public ResultVO<List<ProductVO>> getProductByCate(@PathVariable Long id){
         return productsService.getProductByCate(id);
     }
+
+    @GetMapping("/getProduct/{id}")
+    public ResultVO<Products> getProductById(@PathVariable Long id){
+        return productsService.getProductById(id);
+    }
+
+    @GetMapping("/getStock/{id}")
+    public ResultVO<Integer> getStock(@PathVariable Long id){
+        return productsService.getStock(id);
+    }
 }

@@ -195,6 +195,27 @@ public class ProductsServiceImpl extends ServiceImpl<ProductsMapper, Products>
         }).toList();
         return ResultVO.success(resultList);
     }
+
+    @Override
+    public ResultVO<Products> getProductById(Long id) {
+        if (id==null || id<=0){
+            return ResultVO.error("请选择正确的商品");
+        }
+        Products byId = this.getById(id);
+        if (byId==null){
+            return ResultVO.error("商品错误");
+        }
+        return ResultVO.success(byId);
+    }
+
+    @Override
+    public ResultVO<Integer> getStock(Long id) {
+        ResultVO<Products> productById = getProductById(id);
+        if (!productById.isSuccess()){
+            return ResultVO.error(productById.getMsg());
+        }
+        return ResultVO.success(productById.getData().getStock());
+    }
 }
 
 

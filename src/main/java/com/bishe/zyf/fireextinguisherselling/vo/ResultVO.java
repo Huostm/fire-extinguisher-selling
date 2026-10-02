@@ -35,4 +35,8 @@ public class ResultVO<T> {
     public static <T> ResultVO<T> error(String msg) {
         return new ResultVO<>(500, msg, null);
     }
+
+    public boolean isSuccess() {
+        return this.code == 200;
+    }
 }

@@ -75,4 +75,18 @@ public interface ProductsService extends IService<Products> {
      * @return
      */
     ResultVO<List<ProductVO>> getProductByCate(Long id);
+
+    /**
+     * 根据商品id查询商品
+     * @param id
+     * @return
+     */
+    ResultVO<Products> getProductById(Long id);
+
+    /**
+     * 根据商品id查询库存数量
+     * @param id
+     * @return
+     */
+    ResultVO<Integer> getStock(Long id);
 }
