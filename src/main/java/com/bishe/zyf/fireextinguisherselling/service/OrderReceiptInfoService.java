@@ -1,7 +1,14 @@
 package com.bishe.zyf.fireextinguisherselling.service;
 
+import com.bishe.zyf.fireextinguisherselling.dto.CreateReceiptInfoDTO;
+import com.bishe.zyf.fireextinguisherselling.dto.UpdateReceiptInfoDTO;
 import com.bishe.zyf.fireextinguisherselling.entity.OrderReceiptInfo;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.bishe.zyf.fireextinguisherselling.vo.ListReceiptInfoVO;
+import com.bishe.zyf.fireextinguisherselling.vo.ResultVO;
+import jakarta.validation.Valid;
+
+import java.util.List;
 
 /**
 * @author Administrator
@@ -10,4 +17,30 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface OrderReceiptInfoService extends IService<OrderReceiptInfo> {
 
+    /**
+     * 创建收货信息
+     * @param createReceiptInfoDTO
+     * @return
+     */
+    ResultVO<String> createOrderReceiptInfo(CreateReceiptInfoDTO createReceiptInfoDTO);
+
+    /**
+     * 删除收货信息
+     * @param id
+     * @return
+     */
+    ResultVO<String> deleteReceiptInfo(Long id);
+
+    /**
+     * 编辑收货信息
+     * @param updateReceiptInfoDTO
+     * @return
+     */
+    ResultVO<String> updateReceiptInfo(@Valid UpdateReceiptInfoDTO updateReceiptInfoDTO);
+
+    /**
+     * 收货信息列表
+     * @return
+     */
+    ResultVO<List<ListReceiptInfoVO>> listReceiptInfo();
 }

@@ -2,6 +2,7 @@ package com.bishe.zyf.fireextinguisherselling.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.util.Date;
 import lombok.Data;
@@ -18,11 +19,6 @@ public class OrderReceiptInfo {
      */
     @TableId(type = IdType.AUTO)
     private Long id;
-
-    /**
-     * 订单编号（关联orders表）
-     */
-    private String orderSn;
 
     /**
      * 收货人姓名
@@ -64,6 +60,17 @@ public class OrderReceiptInfo {
      */
     private Date updatedAt;
 
+    /**
+     * 创建人id
+     */
+    private Long userId;
+
+    /**
+     * 是否删除 0否 1是
+     */
+    @TableLogic
+    private Integer isDeleted;
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -77,7 +84,6 @@ public class OrderReceiptInfo {
         }
         OrderReceiptInfo other = (OrderReceiptInfo) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getOrderSn() == null ? other.getOrderSn() == null : this.getOrderSn().equals(other.getOrderSn()))
             && (this.getReceiverName() == null ? other.getReceiverName() == null : this.getReceiverName().equals(other.getReceiverName()))
             && (this.getPhone() == null ? other.getPhone() == null : this.getPhone().equals(other.getPhone()))
             && (this.getProvince() == null ? other.getProvince() == null : this.getProvince().equals(other.getProvince()))
@@ -93,7 +99,6 @@ public class OrderReceiptInfo {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getOrderSn() == null) ? 0 : getOrderSn().hashCode());
         result = prime * result + ((getReceiverName() == null) ? 0 : getReceiverName().hashCode());
         result = prime * result + ((getPhone() == null) ? 0 : getPhone().hashCode());
         result = prime * result + ((getProvince() == null) ? 0 : getProvince().hashCode());
@@ -102,6 +107,8 @@ public class OrderReceiptInfo {
         result = prime * result + ((getDetailAddress() == null) ? 0 : getDetailAddress().hashCode());
         result = prime * result + ((getCreatedAt() == null) ? 0 : getCreatedAt().hashCode());
         result = prime * result + ((getUpdatedAt() == null) ? 0 : getUpdatedAt().hashCode());
+        result = prime * result + ((getUserId() == null) ? 0 : getUserId().hashCode());
+        result = prime * result + ((getIsDeleted() == null) ? 0 : getIsDeleted().hashCode());
         return result;
     }
 
@@ -112,7 +119,6 @@ public class OrderReceiptInfo {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", orderSn=").append(orderSn);
         sb.append(", receiverName=").append(receiverName);
         sb.append(", phone=").append(phone);
         sb.append(", province=").append(province);
@@ -121,6 +127,8 @@ public class OrderReceiptInfo {
         sb.append(", detailAddress=").append(detailAddress);
         sb.append(", createdAt=").append(createdAt);
         sb.append(", updatedAt=").append(updatedAt);
+        sb.append(", userId=").append(userId);
+        sb.append(", isDeleted=").append(isDeleted);
         sb.append("]");
         return sb.toString();
     }
